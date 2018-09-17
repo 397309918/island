@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Island Token</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<header>
+			<div class="clearfix container">
+				<div class="fl">
+					<span>欢迎光临 Island Token!</span>
+				</div>
+				<div class="fr">
+					<div class="loginBefore">
+						<button onclick="login()">登陸</button>
+						<button onclick="register()">註冊</button>
+					</div>
+					<div class="loginAfter">
+						<span id="userInfo">zhangsan</span>
+						<button onclick="quit()">退出</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!--發行總量-->
+		<section class="totalIssued">
+			<div class="islandLogo">
+				<img src="img/islandLogo.png">
+			</div>
+			<div class="islandTitle">
+				<p>Island Token</p>
+				<p>Global Recreation Ecosystem</p>
+				<div class="subscriptionBox">
+					<button onclick="subscription()">认购</button>
+				</div>
+			</div>
+			<div class="totalNumImg">
+				<img src="img/totalNum.png">
+			</div>
+			<div class="totalNumBox">
+				<p>發行總量</p>
+				<p>890,000,000</p>
+			</div>
+		</section>
+		<!--合作夥伴  機構持有-->
+		<section class="commonBox partner">
+			<div class="commonBoxTitle">
+				<h3 class="fontChina">合作夥伴</h3>
+				<p class="fuTitle">Partner</p>
+			</div>
+			<div class="container dislayNone" id="hzdw">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="img/pt/gatehub@2x.png">
+							<img src="img/pt/hubi.png">
+							<img src="img/pt/korbit@2x.png">
+							<img src="img/pt/logoNew.png">
+							<img src="img/pt/sci@2x.png">
+						</div>
+					</div>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="img/qb/Free-Converter.png">
+							<img src="img/qb/huli.png">
+							<img src="img/qb/logo-myetherwallet.png">
+							<img src="img/qb/logo-small.png">
+							<img src="img/qb/token-logo.png">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+		<!--介紹-->
+		<section class="splitzone commonBox">
+			<div class="commonBoxTitle synopsisContentTb">
+				<h3 class=" fontChina colorOrigin"><a class=" synopsisContentTitle colorBlue" href="javascript:void(0);">什麼是 Island Token？</a></h3>
+			</div>
+			<div class="container synopsisContent">
+				<p class="synopsisCon colorWhite">Island Token是一個服务于全球旅游购物以海岛开发的休闲娱乐生态系统，同时遵循世界各地的法律规则，<br>面向全球提供高质量、高品质的消费旅游服务及线下底层基本技术服务。</p>
+				
+				<p class="synopsisCon colorWhite">目前，全球已超过100个国家和地区拥有落地消费产业，无论是市场体量还是用户基数都非常庞大，<br>这为Island Token平台提供强大的经济基础和广阔的应用场景。</p>
+			</div>
+		</section>
+
+		<!--技術特點-->
+		<section class="commonBox ourValue" style="height:auto;">
+			<div class="commonBoxTitle">
+				<h3 class="fontChina">技術特點</h3>
+				<p class="fuTitle">Technical characteristics</p>
+			</div>
+			<div class="container ourValueContent">
+				<div class="clearfix">
+					<div class="ourValueCell fl">
+						<h4>
+							<img src="img/security.png" />
+						</h4>
+						<h4>SECURITY</h4>
+						<p>基於完全公開透明和開放的全民監督模式，可以保障持有者、娛樂規則、投注、結果等信息的不可篡改，同時支持全世界所有幣種的兌換充值和資金安全。</p>
+					</div>
+					<div class="ourValueCell fl">
+						<h4>
+							<img src="img/decentralized.png" />
+						</h4>
+						<h4>DECENTRALIZED</h4>
+						<p>區塊鏈數據的加密特性，能有效保護所有持有用戶的信息及資金安全，特別是滿足中高端貴賓客戶的隱私需求。</p>
+					</div>
+					<div class="ourValueCell fr">
+						<h4>
+							<img src="img/credible.png" />
+						</h4>
+						<h4>CREDIBLE</h4>
+						<p>用戶既可以通過Island Token公有鍊網絡平台的各個客戶端隨時隨地迚行娛樂活勱，還可以通過區塊鏈錢包使用數字籌碼自行組局迚行場外娛樂。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<p>Copyright © 2018 bluedti.com|All rights reserved</p>
+		</footer>
+		
+		
+		<!--彈窗-->
+		<div class="propUp" id="propUp">
+			
+		</div>
+		<script id="subsciptionHtml" type="text/html">
+			<div class="loginBox subBox">
+				<p>
+					<img src="img/close.png" onclick="closeDailog()" />
+				</p>
+				<h3>请选择套餐</h3>
+				<div class="packageList" id="subList">
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell"  onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+					<div class="listCell" onclick="chooseTc(this)">
+						1000
+						<img src="img/choose.png">
+					</div>
+				</div>
+				<div class="commonDiv loginBtnBox">
+					<button class="chooseBtn" onclick="subsFun()">确定</button>
+				</div>
+			</div>
+		</script>
+		<!--注册-->
+		<script id="righterHtml" type="text/html">
+			<div class="loginBox registerBox">
+				<p>
+					<img src="img/close.png" onclick="closeDailog()" />
+				</p>
+				<h3>會員注册</h3>
+				<div class="inputBox userInput">
+					<input placeholder="請輸入您的用戶名" id="username">
+				</div>
+				<div class="inputBox pswInput">
+					<input placeholder="請輸入您的密碼" type="password" id="password">
+				</div>
+				<div class="inputBox pswInput">
+					<input placeholder="請確認您的密碼" type="password" id="surePsw">
+				</div>
+				<div class="inputBox userNameInput">
+					<input placeholder="請輸入您的姓名" id="realname">
+				</div>
+				<div class="inputBox pswInput">
+					<input placeholder="請確認您的手機號" id="phone">
+				</div>
+				<div class="inputBox codeInput">
+					<input placeholder="請輸入邀請碼" id="invitationcode">
+					<button onclick="checkCode()">檢驗邀請碼</button>
+				</div>
+				<div class="inputBox codeInput">
+					<select id="place">
+						<option value="">請選擇位置</option>
+					</select>
+				</div>
+				<div class="commonDiv loginBtnBox">
+					<button class="registerBtn" onclick="registerFun()">註冊</button>
+				</div>
+			</div>
+		</script>
+		<!--登陆-->
+		<script id="loginHtml" type="text/html">
+			<div class="loginBox">
+				<p>
+					<img src="img/close.png" onclick="closeDailog()" />
+				</p>
+				<h3>會員登陸</h3>
+				<div class="inputBox userInput">
+					<input placeholder="請輸入您的用戶名" id="username">
+				</div>
+				<div class="inputBox pswInput">
+					<input placeholder="請輸入您的密碼" type="password" id="password">
+				</div>
+				<div class="inputBox codeInput">
+					<input placeholder="請輸入您的驗證碼" id="verCode">
+					<img id="code" onclick="getVerifyCode()">
+				</div>
+				<p class="commonDiv fogetLink"><a onclick="register()">立即注册</a></p>
+				<div class="commonDiv loginBtnBox">
+					<button class="registerBtn" onclick="loginFun()">登陸</button>
+				</div>
+			</div>
+		</script>
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>
