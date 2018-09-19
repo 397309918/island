@@ -9,7 +9,10 @@ var API = {
 	'qryPlace': apiUrl() + 'user/qryPlace',    //位置信息
 	'verifyCode': apiUrl() + 'user/verifyCode', //圖片
 	'qryGoods': apiUrl() + 'user/qryGoods',      //获取套餐信息
-	'setGoods': apiUrl() + 'user/setGoods'       //提交套餐信息
+	'setGoods': apiUrl() + 'user/setGoods',       //提交套餐信息
+	'getSeatNo': apiUrl() + 'user/getSeatNo',      //获取安置人
+	'regChildNo': apiUrl() + 'user/regChildNo',     //注册
+	'qrySeatNo': apiUrl() + 'user/qrySeatNo'       //查询自定义安置人
 }
 
 
@@ -27,6 +30,48 @@ function login(){
 function register(){
 	$("#propUp").show()
 	$("#propUp").html($("#righterHtml").html())
+	var userIn = JSON.parse(localStorage.userInfo)
+	$("#recommendName").val(userIn.username)
+	$.ajax({
+			type:"post",
+			url:API.qryGoods,
+			async:true,
+			success: function(res){
+				var CHtml = ''
+				if(res.code == 200){
+					for(var index in res.data){
+						CHtml += '<option value="'+ res.data[index].goodsId +'">' + res.data[index].value + '</option>'
+					}
+					$("#goodsId").append(CHtml)
+				}else{
+					alert(res.msg)
+				}
+			}
+		});
+	$.ajax({
+			type:"post",
+			url:API.getSeatNo,
+			async:true,
+			success: function(res){
+				if(res.code == 200){
+					var CHtml = ''
+					if(res.data.left){
+						CHtml+='<option value="left">左區</option>'
+					}
+					if(res.data.right){
+						CHtml+='<option value="right">右區</option>'
+					}
+					if((!res.data.left) && (!res.data.right)){
+						CHtml+='<option value="">該邀請碼無位置，請更換</option>'
+					}
+					$('#place').html(CHtml)
+					$('#seatName').val(res.data.seatName)
+				}else{
+					alert(res.msg)
+					return false
+				}
+			}
+		});
 }
 // 獲取驗證碼
 function getVerifyCode(){
@@ -38,6 +83,39 @@ function getVerifyCode(){
 			if(res.code == '200'){
 				var linkAdd = 'data:image/png;base64,' + res.data.pngBase64
 				$("#code").attr('src',linkAdd)
+			}
+		}
+	})
+}
+function qrySeatNo(){
+	$('#place').html('<option value="">請選擇位置</option>')
+	var seatName = $("#seatName").val()
+	if(!seatName){
+		alert("请输入安置人！")
+		return false
+	}
+	$.ajax({
+		type:"post",
+		url:API.qrySeatNo,
+		data: {seatName: seatName},
+		async:true,
+		success: function(res){
+			if(res.code == 200){
+				var CHtml = ''
+				if(res.data.left){
+					CHtml+='<option value="left">左區</option>'
+				}
+				if(res.data.right){
+					CHtml+='<option value="right">右區</option>'
+				}
+				if((!res.data.left) && (!res.data.right)){
+					CHtml+='<option value="">該邀請碼無位置，請更換</option>'
+				}
+				$('#place').html(CHtml)
+			}else{
+				alert(res.msg)
+				$('#place').html('<option value="">請選擇位置</option>')
+				return false
 			}
 		}
 	})
@@ -75,6 +153,96 @@ function checkCode(){
 		}
 	})
 }
+
+function regChildNo(){
+	$(".registerBtn").attr('disabled','disabled')
+	var username = $("#username").val()
+	var goodsId = $("#goodsId").val()
+	var recommendName = $("#recommendName").val()
+	var seatName = $("#seatName").val()
+	var password = $("#password").val()
+	var surePsw = $("#surePsw").val()
+	var realname = $("#realname").val()
+	var phone = $("#phone").val()
+//	var invitationcode = $("#invitationcode").val()
+	var place = $("#place").val()
+	if(!username){
+		alert("請輸入用戶名")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!goodsId){
+		alert("请选择套餐")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!password){
+		alert("請輸入用戶名")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!surePsw){
+		alert("請輸入確認密碼")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(password != surePsw){
+		alert("兩次密碼輸入不正確")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!realname){
+		alert("請輸入您的姓名")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!phone){
+		alert("請輸入手機號碼")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!recommendName){
+		alert("请输入推荐人")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!seatName){
+		alert("请输入安置人")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	if(!place){
+		alert("請選擇位置")
+		$(".registerBtn").removeAttr('disabled')
+		return false
+	}
+	var parm = {
+		username: username,
+		goodsId: goodsId,
+		password: password,
+		realname: realname,
+		phone: phone,
+		recommendName: recommendName, 
+		seatName: seatName,
+		place: place
+	}
+	$.ajax({
+		type:"post",
+		url:API.regChildNo,
+		async:true,
+		data: parm,
+		success: function(res){
+			if(res.code==200){
+				alert("註冊成功")
+				location.reload()
+			}else{
+				alert(res.msg)
+				return false
+			}
+		}
+	});
+}
+
 function registerFun(){
 	$(".registerBtn").attr('disabled','disabled')
 	var username = $("#username").val()
