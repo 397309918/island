@@ -10,9 +10,9 @@ var API = {
 	'verifyCode': apiUrl() + 'user/verifyCode', //圖片
 	'qryGoods': apiUrl() + 'user/qryGoods',      //获取套餐信息
 	'setGoods': apiUrl() + 'user/setGoods',       //提交套餐信息
-	'getSeatNo': apiUrl() + 'user/getSeatNo',      //获取安置人
+	'getSeatNo': apiUrl() + 'user/getSeatNo',      //获取管理人
 	'regChildNo': apiUrl() + 'user/regChildNo',     //注册
-	'qrySeatNo': apiUrl() + 'user/qrySeatNo'       //查询自定义安置人
+	'qrySeatNo': apiUrl() + 'user/qrySeatNo'       //查询自定义管理人
 }
 
 
@@ -91,7 +91,7 @@ function qrySeatNo(){
 	$('#place').html('<option value="">請選擇位置</option>')
 	var seatName = $("#seatName").val()
 	if(!seatName){
-		alert("请输入安置人！")
+		alert("请输入管理人！")
 		return false
 	}
 	$.ajax({
@@ -207,7 +207,7 @@ function regChildNo(){
 		return false
 	}
 	if(!seatName){
-		alert("请输入安置人")
+		alert("请输入管理人")
 		$(".registerBtn").removeAttr('disabled')
 		return false
 	}
