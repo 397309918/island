@@ -15,7 +15,6 @@
 				<div class="fr">
 					<div class="loginBefore">
 						<button onclick="login()">登陸</button>
-						
 					</div>
 					<div class="loginAfter">
 						<span id="userInfo">zhangsan</span>
@@ -132,6 +131,7 @@
 			
 		</div>
 		<script id="subsciptionHtml" type="text/html">
+			<div class="mask"></div>
 			<div class="loginBox subBox">
 				<p>
 					<img src="img/close.png" onclick="closeDailog()" />
@@ -178,35 +178,44 @@
 		</script>
 		<!--注册-->
 		<script id="righterHtml" type="text/html">
+			<div class="mask"></div>
 			<div class="loginBox registerBox">
 				<p>
 					<img src="img/close.png" onclick="closeDailog()" />
 				</p>
 				<h3>會員注册</h3>
 				<div class="inputBox userInput">
+					<label>用户名：</label>
 					<input placeholder="請輸入您的用戶名" id="username">
 				</div>
 				<div class="inputBox userNameInput">
+					<label>选择套餐：</label>
 					<select id="goodsId">
 						<option value="">请选择套餐</option>
 					</select>
 				</div>
 				<div class="inputBox pswInput">
+					<label>密码：</label>
 					<input placeholder="請輸入您的密碼" type="password" id="password">
 				</div>
 				<div class="inputBox pswInput">
+					<label>确认密码：</label>
 					<input placeholder="請確認您的密碼" type="password" id="surePsw">
 				</div>
 				<div class="inputBox userNameInput">
+					<label>姓名：</label>
 					<input placeholder="請輸入您的姓名" id="realname">
 				</div>
 				<div class="inputBox pswInput">
+					<label>手机号：</label>
 					<input placeholder="請確認您的手機號" id="phone">
 				</div>
 				<div class="inputBox pswInput">
+					<label>推荐人：</label>
 					<input placeholder="请输入推荐人" id="recommendName" >
 				</div>
 				<div class="inputBox pswInput">
+					<label>管理人：</label>
 					<input placeholder="请输入管理人" id="seatName" onblur="qrySeatNo()">
 				</div>
 				<!--<div class="inputBox codeInput">
@@ -214,6 +223,7 @@
 					<button onclick="checkCode()">檢驗邀請碼</button>
 				</div>-->
 				<div class="inputBox codeInput">
+					<label>选择位置：</label>
 					<select id="place">
 						<option value="">請選擇位置</option>
 					</select>
@@ -225,6 +235,7 @@
 		</script>
 		<!--登陆-->
 		<script id="loginHtml" type="text/html">
+			<div class="mask"></div>
 			<div class="loginBox">
 				<p>
 					<img src="img/close.png" onclick="closeDailog()" />
@@ -240,7 +251,7 @@
 					<input placeholder="請輸入您的驗證碼" id="verCode">
 					<img id="code" onclick="getVerifyCode()">
 				</div>
-				<p class="commonDiv fogetLink"><a onclick="register()">立即注册</a></p>
+				<!--<p class="commonDiv fogetLink"><a onclick="register()">立即注册</a></p>-->
 				<div class="commonDiv loginBtnBox">
 					<button class="registerBtn" onclick="loginFun()">登陸</button>
 				</div>
