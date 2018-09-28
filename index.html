@@ -18,6 +18,7 @@
 					</div>
 					<div class="loginAfter">
 						<span id="userInfo">zhangsan</span>
+						
 						<button onclick="quit()">退出</button>
 						<button onclick="register()">註冊</button>
 					</div>
@@ -34,6 +35,7 @@
 				<p>Global Recreation Ecosystem</p>
 				<div class="subscriptionBox">
 					<button onclick="subscription()">认购</button>
+					<button id="treeBtn" onclick="myTree()">我的会员</button>
 				</div>
 			</div>
 			<div class="totalNumImg">
@@ -130,6 +132,40 @@
 		<div class="propUp" id="propUp">
 			
 		</div>
+		<script id="treeHtml" type="text/html">
+			<div class="mask"></div>
+			<div class="loginBox registerBox treeBox">	
+				<p>
+					<img src="img/close.png" onclick="closeDailog()" />
+				</p>
+				<h3>我的名下会员</h3>
+				<!--<div class="tree  both   ">
+          			<span>1</span>
+        			<div class="tree left both   ">
+          				<span>2</span>
+        				<div class="tree left both   ">
+          					<span>4</span>
+        					<div class="tree left  leaf  ">
+          						<span>8</span>
+        					</div>
+        					<div class="tree right  leaf  ">
+          						<span>9</span>
+        					</div>
+						</div>	
+						
+					</div>
+					<div class="tree right both   ">
+          					<span>4</span>
+        					<div class="tree left  leaf  ">
+          						<span>8</span>
+        					</div>
+        					<div class="tree right  leaf  ">
+          						<span>9</span>
+        					</div>
+						</div>	
+				</div>-->
+			</div>
+		</script>
 		<script id="subsciptionHtml" type="text/html">
 			<div class="mask"></div>
 			<div class="loginBox subBox">
@@ -213,6 +249,13 @@
 				<div class="inputBox pswInput">
 					<label>推荐人：</label>
 					<input placeholder="请输入推荐人" id="recommendName" >
+				</div>
+				<div class="inputBox codeInput">
+					<label>位置：</label>
+					<select id="seat" onchange="changeSeat()">
+						<option value="left" selected="selected">左边</option>
+						<option value="right">右边</option>
+					</select>
 				</div>
 				<div class="inputBox pswInput">
 					<label>管理人：</label>

@@ -730,3 +730,65 @@ footer p{
 		width: 90%;
 	}
 }
+#treeBtn{
+	display: none;
+}
+.treeBox{
+	top: 30%;
+	width: 600px;
+	padding-bottom: 40px;
+}
+.treeBox.loginBox h3{
+	margin-bottom: 40px;
+}
+div.tree {
+  display: flex;
+  flex-wrap: wrap;/*span需要独占一行，所以此flex布局必须要折行显示*/
+  align-items: flex-start;
+}
+
+.tree > .tree {
+  width: 50%;
+}
+
+
+div.tree > span {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 3em;
+  background: url(../img/both.svg) no-repeat 0 0;
+  background-size: 100% calc(100% - 0px);
+  cursor: pointer;
+}
+
+/*没有后代的子树不再展示连线和多余空间*/
+div.tree > span:only-child {
+  background-image: none;
+  padding-bottom: 0;
+}
+
+/*右/右子树自动往左/右偏*/
+div.left {
+  margin-right: auto;
+}
+div.right {
+  margin-left: auto;
+}
+
+/*只有单边子树的元素，让此单边子树占用90%的空间*/
+div.only-has-left > div.tree {
+  width: 90%;
+  margin-right: auto;
+}
+div.only-has-right > div.tree {
+  width: 90%;
+  margin-left: auto;
+}
+
+/*只有单边子树的元素只显示单边的连线*/
+div.only-has-left > span {
+  background-image: url(../img/left.svg);
+}
+div.only-has-right > span {
+  background-image: url(../img/right.svg);
+}

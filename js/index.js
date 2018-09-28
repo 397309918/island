@@ -12,7 +12,8 @@ var API = {
 	'setGoods': apiUrl() + 'user/setGoods',       //提交套餐信息
 	'getSeatNo': apiUrl() + 'user/getSeatNo',      //获取管理人
 	'regChildNo': apiUrl() + 'user/regChildNo',     //注册
-	'qrySeatNo': apiUrl() + 'user/qrySeatNo'       //查询自定义管理人
+	'qrySeatNo': apiUrl() + 'user/qrySeatNo',       //查询自定义管理人
+	'qryTree': apiUrl() + 'user/qryTree'            //节点查询
 }
 
 
@@ -32,6 +33,9 @@ function register(){
 	$("#propUp").html($("#righterHtml").html())
 	var userIn = JSON.parse(localStorage.userInfo)
 	$("#recommendName").val(userIn.username)
+	var parm = {
+		seat: 'left'
+	}
 	$.ajax({
 			type:"post",
 			url:API.qryGoods,
@@ -52,6 +56,38 @@ function register(){
 			type:"post",
 			url:API.getSeatNo,
 			async:true,
+			data: parm,
+			success: function(res){
+				if(res.code == 200){
+					var CHtml = ''
+					if(res.data.left){
+						CHtml+='<option value="left">左區</option>'
+					}
+					if(res.data.right){
+						CHtml+='<option value="right">右區</option>'
+					}
+					if((!res.data.left) && (!res.data.right)){
+						CHtml+='<option value="">該邀請碼無位置，請更換</option>'
+					}
+					$('#place').html(CHtml)
+					$('#seatName').val(res.data.seatName)
+				}else{
+					alert(res.msg)
+					return false
+				}
+			}
+		});
+}
+function changeSeat(){
+	var seat = $("#seat").val()
+	var parm = {
+		seat: seat
+	}
+	$.ajax({
+			type:"post",
+			url:API.getSeatNo,
+			async:true,
+			data: parm,
 			success: function(res){
 				if(res.code == 200){
 					var CHtml = ''
@@ -435,13 +471,126 @@ function subsFun(){
 }
 
 
+function myTree(){
+	$("#propUp").html($("#treeHtml").html())
+	$("#propUp").show()
+	var userIn = JSON.parse(localStorage.userInfo)
+	var status = ''
+	if(userIn.isActivation){
+		status = '已激活'
+	}else{
+		status = '未激活'
+	}
+	var parm = {
+			nodeVipName: userIn.username
+		}
+	$.ajax({
+		type:"post",
+		url:API.qryTree,
+		async:true,
+		data: parm,
+		success: function(res){
+			var CHtml = ''
+			CHtml += '<div class="tree  both   ">'
+			CHtml += '<span>'+ userIn.username + ',' + status +'</span>'
+			if(res.code == 200){
+				if(res.data[0].leftVipName){
+					CHtml += '<div class="tree left both   ">'
+					var leftStatus = ''
+					if(res.data[0].leftStatus){
+						leftStatus = '已激活'
+					}else{
+						leftStatus = '未激活'
+					}
+					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[0].leftVipName + '">'+ res.data[0].leftVipName + ',' + leftStatus +'</span>'
+					CHtml += '</div>'
+				}
+				if(res.data[1].rightVipName){
+					CHtml += '<div class="tree right both   ">'
+					var rightStatus = ''
+					if(res.data[1].rightVipName){
+						rightStatus = '已激活'
+					}else{
+						rightStatus = '未激活'
+					}
+					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[1].rightVipName + '">'+ res.data[1].rightVipName + ',' + rightStatus +'</span>'
+					CHtml += '</div>'
+				}
+
+			}else{
+				alert(res.msg)
+			}
+			
+			CHtml += '</div>'
+			$(".treeBox").append(CHtml)
+		}
+	})
+}
+
+
+function childTree(e){
+	var vipname = $(e).data('vipname')
+	var parm = {
+			nodeVipName: vipname
+	}
+	if($(e).next().length == 0){
+		$.ajax({
+			type:"post",
+			url:API.qryTree,
+			async:true,
+			data: parm,
+			success: function(res){
+				var CHtml = ''
+				if(res.code == 200){
+					if(res.data[0].leftVipName){
+						CHtml += '<div class="tree left both   ">'
+						var leftStatus = ''
+						if(res.data[0].leftStatus){
+							leftStatus = '已激活'
+						}else{
+							leftStatus = '未激活'
+						}
+						CHtml += '<span>'+ res.data[0].leftVipName + ',' + leftStatus +'</span>'
+						CHtml += '</div>'
+					}
+					if(res.data[1].rightVipName){
+						CHtml += '<div class="tree right both   ">'
+						var rightStatus = ''
+						if(res.data[1].rightVipName){
+							rightStatus = '已激活'
+						}else{
+							rightStatus = '未激活'
+						}
+						CHtml += '<span>'+ res.data[1].rightVipName + ',' + rightStatus +'</span>'
+						CHtml += '</div>'
+					}
+	
+				}else{
+					alert(res.msg)
+				}
+				$(e).parent().append(CHtml)
+			}
+		})
+	}
+}
+
 $(function(){
 	if(!localStorage.getItem('userInfo')){
 		$(".loginBefore").show()	
 	}else{
 		$(".loginAfter").show()
+		$("#treeBtn").show()
 		var userIn = JSON.parse(localStorage.userInfo)
-		$("#userInfo").text('用戶名：'+userIn.username+'　邀請碼：'+userIn.invitationcode+'　')
+		if(userIn.isBuy){
+			if(userIn.isActivation){
+				$("#userInfo").text('欢迎您成为艾特俱乐部'+userIn.goodsName+'会员，用戶名：'+userIn.username+'　邀請碼：'+userIn.invitationcode+'　')
+			}else{
+				$("#userInfo").text('用戶名：'+userIn.username+'　邀請碼：'+userIn.invitationcode+'　未激活')
+			}
+		}else{
+			$("#userInfo").text('用戶名：'+userIn.username+'　邀請碼：'+userIn.invitationcode+'　')
+		}
 	}
+	
 	
 })
