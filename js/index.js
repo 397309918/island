@@ -4,8 +4,8 @@ function apiUrl(){
 }
 
 var API = {
-	'login': apiUrl() + 'user/login',      //登陸
-	'reg': apiUrl() + 'user/reg',  //註冊
+	'login': apiUrl() + 'user/login',       //登陸
+	'reg': apiUrl() + 'user/reg',  			//註冊
 	'qryPlace': apiUrl() + 'user/qryPlace',    //位置信息
 	'verifyCode': apiUrl() + 'user/verifyCode', //圖片
 	'qryGoods': apiUrl() + 'user/qryGoods',      //获取套餐信息
@@ -508,7 +508,7 @@ function myTree(){
 				if(res.data[1].rightVipName){
 					CHtml += '<div class="tree right both   ">'
 					var rightStatus = ''
-					if(res.data[1].rightVipName){
+					if(res.data[1].rightStatus){
 						rightStatus = '已激活'
 					}else{
 						rightStatus = '未激活'
@@ -556,7 +556,7 @@ function childTree(e){
 					if(res.data[1].rightVipName){
 						CHtml += '<div class="tree right both   ">'
 						var rightStatus = ''
-						if(res.data[1].rightVipName){
+						if(res.data[1].rightStatus){
 							rightStatus = '已激活'
 						}else{
 							rightStatus = '未激活'
