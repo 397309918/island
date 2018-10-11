@@ -730,7 +730,7 @@ footer p{
 		width: 90%;
 	}
 }
-#treeBtn{
+#treeBtn,#myMoney{
 	display: none;
 }
 .treeBox{
@@ -740,6 +740,17 @@ footer p{
 }
 .treeBox.loginBox h3{
 	margin-bottom: 40px;
+}
+.assetsBox > .clearfix{
+	line-height: 40px;
+	font-size: 18px;
+}
+.assetsBox>.clearfix>.fl{
+	padding-left: 50px;
+}
+.assetsBox>.clearfix>.fr{
+	padding-right: 50px;
+	font-size: 20px;
 }
 div.tree {
   display: flex;

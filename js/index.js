@@ -13,7 +13,9 @@ var API = {
 	'getSeatNo': apiUrl() + 'user/getSeatNo',      //获取管理人
 	'regChildNo': apiUrl() + 'user/regChildNo',     //注册
 	'qrySeatNo': apiUrl() + 'user/qrySeatNo',       //查询自定义管理人
-	'qryTree': apiUrl() + 'user/qryTree'            //节点查询
+	'qryTree': apiUrl() + 'user/qryTree',            //节点查询
+	'qryAssets': apiUrl() + 'user/qryAssets'            //节点查询
+	
 }
 
 
@@ -574,12 +576,35 @@ function childTree(e){
 	}
 }
 
+function getMyMon(){
+	
+	$.ajax({
+		type:"post",
+		url:API.qryAssets,
+		async:true,
+		success: function(data){
+			if(data.code == 200){
+				$("#propUp").html($("#assetsHtml").html())
+				$("#propUp").show()
+				$("#atzichan").html(data.data.atzichan)
+				$("#atjifen").html(data.data.atjifen)
+				$("#atshouyi").html(data.data.atshouyi)
+				$("#atling").html(data.data.atling)
+				$("#zcshouyi").html(data.data.zcshouyi)
+				$("#sfjifen").html(data.data.sfjifen)
+			}else{
+				alert(res.msg)
+			}
+		}
+	});
+}
 $(function(){
 	if(!localStorage.getItem('userInfo')){
 		$(".loginBefore").show()	
 	}else{
 		$(".loginAfter").show()
 		$("#treeBtn").show()
+		$("#myMoney").show()
 		var userIn = JSON.parse(localStorage.userInfo)
 		if(userIn.isBuy){
 			if(userIn.isActivation){

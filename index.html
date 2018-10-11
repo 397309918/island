@@ -35,6 +35,7 @@
 				<div class="subscriptionBox">
 					<button onclick="subscription()">认购</button>
 					<button id="treeBtn" onclick="myTree()">市场管理</button>
+					<button id="myMoney" onclick="getMyMon()">我的资产</button>
 				</div>
 			</div>
 			<div class="totalNumImg">
@@ -131,6 +132,39 @@
 		<div class="propUp" id="propUp">
 			
 		</div>
+		<script id="assetsHtml" type="text/html">
+			<div class="mask"></div>
+			<div class="loginBox registerBox treeBox assetsBox">	
+				<p>
+					<img src="img/close.png" onclick="closeDailog()" />
+				</p>
+				<h3>我的资产</h3>
+				<div class="clearfix">
+					<p class="fl">艾特资产：</p>
+					<p class="fr" id="atzichan"></p>
+				</div>
+				<div class="clearfix">
+					<p class="fl">艾特积分：</p>
+					<p class="fr" id="atjifen"></p>
+				</div>
+				<div class="clearfix">
+					<p class="fl">艾特收益：</p>
+					<p class="fr" id="atshouyi"></p>
+				</div>
+				<div class="clearfix">
+					<p class="fl">艾特令：</p>
+					<p class="fr" id="atling"></p>
+				</div>
+				<div class="clearfix">
+					<p class="fl">资产收益：</p>
+					<p class="fr" id="zcshouyi"></p>
+				</div>
+				<div class="clearfix">
+					<p class="fl">消费积分：</p>
+					<p class="fr" id="sfjifen"></p>
+				</div>
+			</div>
+		</script>
 		<script id="treeHtml" type="text/html">
 			<div class="mask"></div>
 			<div class="loginBox registerBox treeBox">	
