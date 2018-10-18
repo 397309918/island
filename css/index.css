@@ -741,6 +741,11 @@ footer p{
 .treeBox.loginBox h3{
 	margin-bottom: 40px;
 }
+.treeBox.loginBox p{
+	margin-bottom: 20px;
+	margin-top: 20px;
+	font-size: 16px;
+}
 .assetsBox > .clearfix{
 	line-height: 40px;
 	font-size: 18px;

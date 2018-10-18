@@ -476,15 +476,15 @@ function subsFun(){
 function myTree(){
 	$("#propUp").html($("#treeHtml").html())
 	$("#propUp").show()
-	var userIn = JSON.parse(localStorage.userInfo)
-	var status = ''
-	if(userIn.isActivation){
-		status = '已激活'
-	}else{
-		status = '未激活'
-	}
+//	var userIn = JSON.parse(localStorage.userInfo)
+//	var status = ''
+//	if(userIn.isActivation){
+//		status = '已激活'
+//	}else{
+//		status = '未激活'
+//	}
 	var parm = {
-			nodeVipName: userIn.username
+			treeType: 'anzhi'
 		}
 	$.ajax({
 		type:"post",
@@ -492,39 +492,63 @@ function myTree(){
 		async:true,
 		data: parm,
 		success: function(res){
-			var CHtml = ''
-			CHtml += '<div class="tree  both   ">'
-			CHtml += '<span>'+ userIn.username + ',' + status +'</span>'
-			if(res.code == 200){
-				if(res.data[0].leftVipName){
-					CHtml += '<div class="tree left both   ">'
-					var leftStatus = ''
-					if(res.data[0].leftStatus){
-						leftStatus = '已激活'
-					}else{
-						leftStatus = '未激活'
-					}
-					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[0].leftVipName + '">'+ res.data[0].leftVipName + ',' + leftStatus +'</span>'
-					CHtml += '</div>'
-				}
-				if(res.data[1].rightVipName){
-					CHtml += '<div class="tree right both   ">'
-					var rightStatus = ''
-					if(res.data[1].rightStatus){
-						rightStatus = '已激活'
-					}else{
-						rightStatus = '未激活'
-					}
-					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[1].rightVipName + '">'+ res.data[1].rightVipName + ',' + rightStatus +'</span>'
-					CHtml += '</div>'
-				}
+			console.log(res)
+			$('.treeBox1').jstree(
+					{ 'core' : {
+					    'data' : res.data
+					} 
+				})
+//			var CHtml = ''
+//			CHtml += '<div class="tree  both   ">'
+//			CHtml += '<span>'+ userIn.username + ',' + status +'</span>'
+//			if(res.code == 200){
+//				if(res.data[0].leftVipName){
+//					CHtml += '<div class="tree left both   ">'
+//					var leftStatus = ''
+//					if(res.data[0].leftStatus){
+//						leftStatus = '已激活'
+//					}else{
+//						leftStatus = '未激活'
+//					}
+//					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[0].leftVipName + '">'+ res.data[0].leftVipName + ',' + leftStatus +'</span>'
+//					CHtml += '</div>'
+//				}
+//				if(res.data[1].rightVipName){
+//					CHtml += '<div class="tree right both   ">'
+//					var rightStatus = ''
+//					if(res.data[1].rightStatus){
+//						rightStatus = '已激活'
+//					}else{
+//						rightStatus = '未激活'
+//					}
+//					CHtml += '<span onclick="childTree(this)" data-vipname="'+ res.data[1].rightVipName + '">'+ res.data[1].rightVipName + ',' + rightStatus +'</span>'
+//					CHtml += '</div>'
+//				}
 
-			}else{
-				alert(res.msg)
-			}
-			
-			CHtml += '</div>'
-			$(".treeBox").append(CHtml)
+//			}else{
+//				alert(res.msg)
+//			}
+//			
+//			CHtml += '</div>'
+//			$(".treeBox").append(CHtml)
+		}
+	})
+	var parm1 = {
+			treeType: 'tuijian'
+		}
+	
+	$.ajax({
+		type:"post",
+		url:API.qryTree,
+		async:true,
+		data: parm1,
+		success: function(res){
+			console.log(res)
+			$('.treeBox2').jstree(
+					{ 'core' : {
+					    'data' : res.data
+					} 
+				})
 		}
 	})
 }
