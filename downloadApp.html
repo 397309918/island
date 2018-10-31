@@ -34,6 +34,7 @@
     </div>
     <script>
     	function weixinTip(ele) {
+    		
 	        var ua = navigator.userAgent;
 	        var isWeixin = !!/MicroMessenger/i.test(ua);
 	        var isQQ=!!/MQQBrowser/i.test(ua);
@@ -52,7 +53,7 @@
 	    }
     	
     	function onDownload(e) {
-        
+        	btn.setAttribute('disabled','disabled')
 	        if (navigator.userAgent.indexOf('iPhone') > -1) {
 //	            loading(e, 1);
 	            openNew("itms-services://?action=download-manifest&url=https://ce6cef6.assetclub.org/manifest.plist");
