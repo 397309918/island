@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>APP下载</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/downloadApp.css">
+</head>
+<body>
+	<div class="downloadBox">
+		<div class="container downloadDiv">
+			<div class="downloadDivTop">
+				<div class="imgBox">
+					<img src="img/landlogo.png">
+					<!-- <img src="src/images/APPText.png"> -->
+				</div>
+			</div>
+			<div class="downloadDivBot">
+				<p class="imageBox">
+					<img src="img/erweima.png">
+				</p>
+				<p class="linkIphone"><a href="https://support.apple.com/zh-cn/HT204460">提示"未授信企业开发者"解决方案</a></p>
+				<div class="btnBox">
+					<button id="btn" onClick="onDownload(this)">点击下载</button>
+				</div>
+				<p class="tipsTex">或用手机扫描二维码安装</p>
+			</div>
+		</div>
+	</div>
+	<div class="wxtip" id="JweixinTip">
+        <span class="wxtip-icon"></span>
+        <p class="wxtip-txt">点击右上角<br>选择在浏览器中打开</p>
+    </div>
+    <script>
+    	function weixinTip(ele) {
+	        var ua = navigator.userAgent;
+	        var isWeixin = !!/MicroMessenger/i.test(ua);
+	        var isQQ=!!/MQQBrowser/i.test(ua);
+	        if(isWeixin||isQQ){
+	            if(!!/huawei|honor/i.test(ua)){
+	                return;
+	            }
+	            ele.onclick=function(e){
+	                window.event? window.event.returnValue = false : e.preventDefault();
+	                document.getElementById('JweixinTip').style.display='block';
+	            };
+	            document.getElementById('JweixinTip').onclick=function(){
+	                this.style.display='none';
+	            }
+	        }
+	    }
+    	
+    	function onDownload(e) {
+        
+	        if (navigator.userAgent.indexOf('iPhone') > -1) {
+//	            loading(e, 1);
+	            openNew("itms-services://?action=download-manifest&url=https://a57ce6e.fowin.io/mainifest.plist");
+	        }
+	        
+	        else {
+//	            loading(e);
+//	            openNew("https://www.ukbbv.com/static/app/bbv.apk");
+//				openNew('https://a57ce6e.fowin.io/fowin.apk')
+				openNew('http://175.6.12.78/appdownload/fowin.apk')
+	        }
+	    }
+    	
+    	function openNew(url) {
+	        var a = document.createElement('a');
+	        a.setAttribute('href', url);
+	        a.setAttribute('target', '_blank');
+	        a.setAttribute('id', url);
+	        a.setAttribute('download', url);
+	        
+	        if (!document.getElementById(url)) document.body.appendChild(a);
+	        a.click();
+	    }
+    	
+    	var btn = document.getElementById('btn');
+    	weixinTip(btn)
+    	
+    </script>
+    
+</body>
+</html>
