@@ -37,18 +37,18 @@
 	        var ua = navigator.userAgent;
 	        var isWeixin = !!/MicroMessenger/i.test(ua);
 	        var isQQ=!!/MQQBrowser/i.test(ua);
-	        if(isWeixin||isQQ){
-	            if(!!/huawei|honor/i.test(ua)){
-	                return;
-	            }
-	            ele.onclick=function(e){
-	                window.event? window.event.returnValue = false : e.preventDefault();
-	                document.getElementById('JweixinTip').style.display='block';
-	            };
-	            document.getElementById('JweixinTip').onclick=function(){
-	                this.style.display='none';
-	            }
-	        }
+//	        if(isWeixin||isQQ){
+//	            if(!!/huawei|honor/i.test(ua)){
+//	                return;
+//	            }
+//	            ele.onclick=function(e){
+//	                window.event? window.event.returnValue = false : e.preventDefault();
+//	                document.getElementById('JweixinTip').style.display='block';
+//	            };
+//	            document.getElementById('JweixinTip').onclick=function(){
+//	                this.style.display='none';
+//	            }
+//	        }
 	    }
     	
     	function onDownload(e) {
